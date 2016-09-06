@@ -45,10 +45,12 @@ public class Main {
         try {
             ArrayList<String> packets = new ArrayList<>();
             StringBuilder packet = new StringBuilder();
-            char character = (char) con.read();
+            int bitData = con.read();
+            char character = (char) bitData;
             packet.append(character);
-            for (int i = 0; i < 50; i++) {
-                character = (char) con.read();
+            while (bitData != -1) {
+                bitData = con.read();
+                character = (char) bitData;
                 if(character != '!') {
                     packet.append(character);
                 } else if(packet.toString().charAt(0) == '!') {
